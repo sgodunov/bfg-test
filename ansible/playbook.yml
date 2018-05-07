@@ -1,0 +1,12 @@
+---
+- name: Setup
+  hosts: test
+  become: yes
+  roles:
+    - common 
+    - python 
+    - virtualenv
+    - mysql
+    - redis
+    - app
+    - nginx

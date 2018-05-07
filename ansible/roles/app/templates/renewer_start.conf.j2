@@ -1,0 +1,10 @@
+[program:renewer_start]
+process_name=renewer_start
+command={{ home_dir }}/{{ repo_name }}/bin/python3 {{ home_dir }}/{{ repo_name }}/bin/renewer_start
+directory={{ home_dir }}/{{ repo_name }}
+environment=PATH="{{ home_dir }}/{{ repo_name }}/bin"
+user={{ unpriv_user }}
+group={{ unpriv_user }}
+#killasgroup=true
+startsecs=5
+stopwaitsecs=5

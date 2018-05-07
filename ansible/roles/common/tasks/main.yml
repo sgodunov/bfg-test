@@ -1,0 +1,19 @@
+---
+- name: Add unpriviliged user
+  user:
+    name: "{{ unpriv_user }}"
+  tags: common
+
+- name: Install services, tools and libs
+  apt: pkg={{ item }} state=present
+  with_items:
+      - gcc
+      - make
+      - libssl-dev
+      - git
+      - supervisor
+      - redis-server
+      - mysql-server-5.7
+      - nginx
+      - python-mysqldb
+  tags: common

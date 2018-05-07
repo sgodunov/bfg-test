@@ -1,0 +1,24 @@
+---        
+- name: Get python tarball and extract
+  unarchive: 
+    src: "{{ python3_url }}"
+    remote_src: yes
+    dest: "{{ home_dir }}"
+    owner: "{{ unpriv_user }}"
+    group: "{{ unpriv_user }}"
+  tags: python3
+          
+- name: Generate Makefile in python3
+  become_user: "{{ unpriv_user }}"
+  command: ./configure
+  args:
+    chdir: "{{ home_dir }}/{{ python3_ver }}"
+    creates: Makefile
+  tags: python3
+      
+- name: Build & install python3
+  become: yes
+  command: make install
+  args:
+    chdir: "{{ home_dir }}/{{ python3_ver }}"
+  tags: python3

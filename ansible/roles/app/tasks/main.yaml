@@ -1,0 +1,26 @@
+---
+- name: Copy supervisor confs
+  become: yes
+  template:
+    src: "{{ item }}.conf.j2"
+    dest: "/etc/supervisor/conf.d/{{ item }}.conf"
+  with_items:
+    - stack_start
+    - renewer_start
+  tags: app
+
+- name: Reread supervisor config
+  become: yes
+  command: "service supervisor {{ item }}"
+  with_items:
+    - stop
+    - start
+  tags: app
+
+- name: Symlink app log to /var/log
+  become: yes
+  file:
+    state: link
+    src: /etc/stackoversearch/logs
+    path: /var/log/stackoversearch
+  tags: app

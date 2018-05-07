@@ -1,0 +1,6 @@
+---
+test:
+  hosts:
+    localhost:
+      ansible_ssh_host: localhost
+      ansible_ssh_port: 10022

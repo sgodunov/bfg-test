@@ -1,0 +1,6 @@
+---
+- name: Start redis-server
+  become: yes
+  command: service redis-server restart
+  tags: redis
+  

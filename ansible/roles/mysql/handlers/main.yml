@@ -1,0 +1,8 @@
+---        
+- name: Import sql schema
+  mysql_db:
+    state: import
+    name: "{{ mysql_db_name }}"
+    login_user: root
+    login_password: "{{ mysql_root_pass }}"
+    target: "{{ home_dir }}/{{ repo_name }}/tables.sql"

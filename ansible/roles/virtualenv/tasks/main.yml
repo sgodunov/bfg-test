@@ -1,0 +1,45 @@
+---
+- name: Install virtualenv
+  become: yes
+  command: pip3 install virtualenv
+  tags: virtualenv
+
+- name: Clone repo
+  become_user: "{{ unpriv_user }}"
+  git:
+    repo: "{{ repo_url }}"
+    dest: "{{ home_dir }}/{{ repo_name }}"
+  tags: virtualenv
+
+- name: Create virtualenv
+  become_user: "{{ unpriv_user }}"
+  command: "virtualenv {{ home_dir }}/{{ repo_name }} -p python3"
+  args:
+    creates: "{{ home_dir }}/{{ repo_name }}/bin"
+  tags: virtualenv
+
+- name: Install project
+  become_user: "{{ unpriv_user }}"
+  pip:
+    chdir: "{{ home_dir }}"
+    editable: yes
+    name: "./{{ repo_name }}"
+    virtualenv: "{{ home_dir }}/{{ repo_name }}"
+  tags: virtualenv
+
+- name: Check project dir
+  become: yes
+  file:
+    path: /etc/stackoversearch
+    state: directory
+    group: "{{ unpriv_user }}"
+    owner: "{{ unpriv_user }}"
+    mode: 0700
+  tags: virtualenv
+
+- name: Copy project config
+  copy:
+    remote_src: yes
+    src: "{{ home_dir }}/{{ repo_name }}/stackoversearch/stack_settings.ini"
+    dest: "/etc/stackoversearch/stack_settings.ini"
+  tags: virtualenv
