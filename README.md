@@ -1,5 +1,5 @@
 # bfg-test
----
+
 ## provision
 ##### Requirements:
 * docker >= 17.0
@@ -20,7 +20,7 @@ To stop container and delete image:
 $ ./provision.sh destroy
 ```
 
-----
+
 ## ansible
 ##### Requirements:
 * ansible >= 2.0
@@ -35,5 +35,6 @@ Ansible vault password: `bfg-test`
 
 ----
 After starting container and running playbook you should be able to see project page at http://localhost
-App, nginx, mysql logs can be found in subdirs of docker's */var/log*
-Due to test nature of a project private key have been pushed to repository.
+App, nginx, mysql logs can be found in subdirs of docker's */var/log*.
+
+**Due to test nature of a project private key have been pushed to repository.**
