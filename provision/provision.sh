@@ -5,6 +5,7 @@ DOCKER=`which docker`
 DOCKERTAG="bfg-test"
 SSHPORT="10022"
 HTTPPORT="80"
+WSPORT="8081"
 
 function usage
 {
@@ -26,7 +27,7 @@ case $1 in
 		if [ "`$DOCKER images $DOCKERTAG -q`" == "" ]
 		then
 			$DOCKER build -t $DOCKERTAG .
-			$DOCKER run -d --name $DOCKERTAG -p $SSHPORT:22 -p $HTTPPORT:80 $DOCKERTAG:latest
+			$DOCKER run -d --name $DOCKERTAG -p $SSHPORT:22 -p $HTTPPORT:80 -p $WSPORT:$WSPORT $DOCKERTAG:latest
 		fi
 		;;
 	destroy)

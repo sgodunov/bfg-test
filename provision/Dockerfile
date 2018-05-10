@@ -15,6 +15,6 @@ RUN chown -R ubuntu.ubuntu /home/ubuntu/.ssh \
 	&& chmod 700 /home/ubuntu/.ssh \
 	&& chmod 600 /home/ubuntu/.ssh/*
 
-EXPOSE 22 80
+EXPOSE 22 80 8081
 
 CMD ["/usr/sbin/sshd", "-D"]
